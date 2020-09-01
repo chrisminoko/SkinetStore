@@ -6,6 +6,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Infrastructure.Data;
+using Core.Interfaces;
+using Infrastructure;
 
 namespace API
 {
@@ -23,6 +25,7 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddScoped<IProductRepository, ProductRepository>();
             services.AddDbContext<StoreContext>(x =>
             {
                 x.UseSqlite(_config.GetConnectionString("DefaultConnection"));
